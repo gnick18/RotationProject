@@ -1,0 +1,28 @@
+#Specify the HTCondor Universe (vanilla is the default and is used
+#Process will provide the number for which run the computer is on
+universe = vanilla
+plusone = $(Process) + 1
+NewProcess = $INT(plusone,%d)
+log = $(NewProcess)rename.log
+error = $(NewProcess)rename.err
+#
+# Specify your executable (single binary or a script that runs several
+executable = Rename.sh
+arguments = "22 51"
+output = $(NewProcess)rename.out
+#
+#make sure it has cluster
+requirements = (Target.HasCHTCStaging == true) && (OpSysMajorVer == 7)
+#
+# Specify that HTCondor should transfer files to and from the
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files =/home/gnickles/ncbi-blast-2.8.1+-x64-linux.tar.gz,/home/gnickles/FungalPopgenSMGC-master.tar.gz,/home/gnickles/pythonNEW.tar.gz,/home/gnickles/cufflinks-2.2.1.Linux_x86_64.tar.gz,/home/gnickles/Genomes/22mFu.fa,/home/gnickles/Genomes/22mFu.gff, /home/gnickles/Genomes/51mFu.fa, /home/gnickles/Genomes/51mFu.gff, /home/gnickles/Genomes/52mFu.fa, /home/gnickles/Genomes/52mFu.gff
+#
+# Tell HTCondor what amount of compute resources
+request_cpus = 1
+request_memory = 2GB
+request_disk = 3GB
+#
+# Tell HTCondor to run 2 instances of our job:
+queue 2
