@@ -23,7 +23,7 @@ Iso="$1""mFu.gff"
 IsoG="$1""mFu.fa"
 #
 #
-#
+# NOT RUNNING SINCE THEY'RE PASSED IN THROUGH THE sub file
 # This is the location of the annotation and sequences
 #cp /home/gnickles/Genomes/"$Reff" .
 #cp /home/gnickles/Genomes/"$Iso" .
@@ -77,8 +77,8 @@ rename_fasta.py $1ISO_names $1"$Tag"_prot.fa > $1"$Tag"_prot_renamed.fa
 #
 #convert_augustus_gff_and_fasta_to_gbk.py "$IsoG" $1"$Tag"_genes_renamed.gff $1"$Tag"_prot_renamed.fa > $1"$Tag"_genome.gbk
 #
-cp *renamed.fa ~/home/gnickles/
-cp *renamed.gff ~/home/gnickles/
+cp *renamed.fa /home/gnickles/
+cp *renamed.gff /home/gnickles/
 #
 rm *.fa *.bls *.gff *.fasta *.fasta.fai
 rm *prot_renamed.fa*
