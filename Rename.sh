@@ -12,6 +12,8 @@ export PATH=$(pwd)/ncbi-blast-2.8.1+/bin:$PATH
 export PATH=$(pwd)/python/bin:$PATH
 export PATH=$(pwd)/cufflinks-2.2.1.Linux_x86_64:$PATH
 #
+##This should extract 51 or 22 depending on what the sub send in as the ISO file
+Name=`ls -lh | grep ISOmFu.fa | awk '{print $9}' | sed 's/ISOmFu\.fa//'`
 #
 #This script currently assumes that reff is 1TAG
 Tag="mFc"
@@ -19,12 +21,11 @@ Tag="mFc"
 Reff="52mFu.gff"
 ReffG="52mFu.fa"
 #
-Iso="$1""mFu.gff"
-IsoG="$1""mFu.fa"
-#
+Iso=$Name"ISOmFu.gff"
+IsoG=$Name"ISOmFu.fa"
 #
 # NOT RUNNING SINCE THEY'RE PASSED IN THROUGH THE sub file
-# This is the location of the annotation and sequences
+# This is the location of he annotation and sequences
 #cp /home/gnickles/Genomes/"$Reff" .
 #cp /home/gnickles/Genomes/"$Iso" .
 #cp /home/gnickles/Genomes/"$ReffG" .
@@ -80,6 +81,6 @@ rename_fasta.py $1ISO_names $1"$Tag"_prot.fa > $1"$Tag"_prot_renamed.fa
 cp *renamed.fa /home/gnickles/
 cp *renamed.gff /home/gnickles/
 #
-rm *.fa *.bls *.gff *.fasta *.fasta.fai
-rm *prot_renamed.fa*
-rm *mCc_prot.fa*
+#rm *.fa *.bls *.gff *.fasta *.fasta.fai
+#rm *prot_renamed.fa*
+#rm *mCc_prot.fa*
