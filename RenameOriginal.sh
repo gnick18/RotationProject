@@ -14,21 +14,21 @@ export PATH=$(pwd)/cufflinks-2.2.1.Linux_x86_64:$PATH
 #
 #
 #This script currently assumes that reff is 1TAG
-Tag="mCc"
+Tag="mFc"
+#1 = 51mFu
+#2 = 22
+Reff="52mFu.gff"
+ReffG="52mFu.fa"
 #
-Reff="4mCc_genes_renamed.gff"
-ReffG="4mCc_New_Trimmed_Scaffolds.fasta"
-#
-Iso="$1""mCc_Trimmed_annotation.gff"
-IsoG="$1""mCc_New_Trimmed_Scaffolds.fasta"
+Iso="$1""mFu.gff"
+IsoG="$1""mFu.fa"
 #
 #
 #
-#
-cp /staging/mdrott/"$Reff" .
-cp /staging/mdrott/"$Iso" .
-cp /staging/mdrott/"$ReffG" .
-cp /staging/mdrott/"$IsoG" .
+#cp /staging/mdrott/"$Reff" .
+#cp /staging/mdrott/"$Iso" .
+#cp /staging/mdrott/"$ReffG" .
+#cp /staging/mdrott/"$IsoG" .
 #
 #
 gffread "$Iso" -x CDS_$1"$Tag".fa -g "$IsoG"
@@ -77,9 +77,9 @@ rename_fasta.py $1ISO_names $1"$Tag"_prot.fa > $1"$Tag"_prot_renamed.fa
 #
 #convert_augustus_gff_and_fasta_to_gbk.py "$IsoG" $1"$Tag"_genes_renamed.gff $1"$Tag"_prot_renamed.fa > $1"$Tag"_genome.gbk
 #
-cp *renamed.fa /staging/mdrott/
-cp *renamed.gff /staging/mdrott/
+#cp *renamed.fa /staging/mdrott/
+#cp *renamed.gff /staging/mdrott/
 #
-rm *.fa *.bls *.gff *.fasta *.fasta.fai
-rm *prot_renamed.fa*
-rm *mCc_prot.fa*
+#rm *.fa *.bls *.gff *.fasta *.fasta.fai
+#rm *prot_renamed.fa*
+#rm *mCc_prot.fa*

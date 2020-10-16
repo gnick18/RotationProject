@@ -6,17 +6,18 @@ log = $(NewProcess)rename.log
 error = $(NewProcess)rename.err
 #
 # Specify your executable (single binary or a script that runs several
-executable = Rename.sh
+executable = RenameOriginal.sh
 arguments = $(NewProcess)
 output = $(NewProcess)rename.out
 #
-#make sure it has gluster
+#make sure it has cluster
 requirements = (Target.HasCHTCStaging == true) && (OpSysMajorVer == 7)
 #
 # Specify that HTCondor should transfer files to and from the
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_input_files =/home/mdrott/ncbi-blast-2.8.1+-x64-linux.tar.gz,/home/mdrott/FungalPopgenSMGC-master.tar.gz,/home/mdrott/pythonNEW.tar.gz,/home/mdrott/cufflinks-2.2.1.Linux_x86_64.tar.gz
+# Transfering the tar.gz files and all of the needed gff and fa files for the run.
+transfer_input_files =/home/gnickles/ncbi-blast-2.8.1+-x64-linux.tar.gz,/home/gnickles/FungalPopgenSMGC-master.tar.gz,/home/gnickles/pythonNEW.tar.gz,/home/gnickles/cufflinks-2.2.1.Linux_x86_64.tar.gz,/home/gnickles/Genomes/52mFu.gff,/home/gnickles/Genomes/52mFu.fa,/home/gnickles/Genomes/$(NewProcess)mFu.fa,/home/gnickles/Genomes/$(NewProcess)mFu.gff
 #
 # Tell HTCondor what amount of compute resources
 request_cpus = 1
