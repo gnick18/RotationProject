@@ -1,0 +1,27 @@
+# Specify the HTCondor Universe (vanilla is the default and is used
+universe = vanilla
+plusone = $(Process) + 1
+NewProcess = $INT(plusone,%d)
+log = $(NewProcess)ipro.log
+error = $(NewProcess)ipro.err
+#
+# Specify your executable (single binary or a script that runs several
+executable = ipro_LD.sh
+arguments = $(NewProcess)
+output = $(NewProcess)ipro.out
+#
+#make sure it has gluster
+requirements = (Target.HasCHTCStaging == true) && (OpSysMajorVer == 7)
+#
+# Specify that HTCondor should transfer files to and from the
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files =/staging/mdrott/interproscan-5.44-79.0-64-bit.tar.gz, /staging/mdrott/jdk-11.0.7_linux-x64_bin.tar.gz, /home/mdrott/FungalPopgenSMGC-master.tar.gz,/home/mdrott/pythonNEW.tar.gz,/home/mdrott/cufflinks-2.2.1.Linux_x86_64.tar.gz, /home/mdrott/Fungi/$(name).tar.gz
+#
+# Tell HTCondor what amount of compute resources
+request_cpus = 3
+request_memory = 25GB
+request_disk = 15GB
+#
+# Tell HTCondor to run 3 instances of our job:
+queue name from /home/mdrott/Fungi/accessions.txt
