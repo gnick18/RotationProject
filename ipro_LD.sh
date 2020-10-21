@@ -1,6 +1,7 @@
 #!/bin/sh
 #
-Name=`ls -lh | awk '{print $9}'| grep ^GC|  grep tar.gz |  sed 's/\.tar\.gz//'`
+#Name=`ls -lh | awk '{print $9}'| grep ^GC|  grep tar.gz |  sed 's/\.tar\.gz//'`
+Name=22_ICS
 tar -xvf "$Name".tar.gz
 #
 tar -xzf FungalPopgenSMGC-master.tar.gz
