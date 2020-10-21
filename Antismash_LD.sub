@@ -1,0 +1,35 @@
+Antismash_LD.sub
+# Specify the HTCondor Universe (vanilla is the default and is used
+universe = docker
+docker_image=aflatoxing/antismash5
+plusone = $(Process) + 1
+NewProcess = $INT(plusone,%d)
+arguments = $(NewProcess)
+#
+# Specify your executable (single binary or a script that runs several
+executable = antismash_LD.sh
+#
+output = $(NewProcess)anti.out
+log = $(NewProcess)anti.log
+error = $(NewProcess)anti.err
+#
+#make sure it has gluster
+requirements = (Target.HasCHTCStaging == true) && (OpSysMajorVer == 7)
+#
+# Specify that HTCondor should transfer files to and from the
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = /home/gnickles/Fungi/$(name).tar.gz
+#
+#Tell HTCondor what amount of compute resources
+#1 has worked fine for cpus
+request_cpus = 1
+#10 mostly works fine for memory
+request_memory = 25GB
+#5 mostly works fine for disk
+request_disk = 7GB
+#
+# Tell HTCondor to run 3 instances of our job:
+#
+#queue name from /home/mdrott/Fungi/accessions.txt
+queue name from /home/mdrott/Fungi/fail
