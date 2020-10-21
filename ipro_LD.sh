@@ -2,7 +2,7 @@
 #
 #Name=`ls -lh | awk '{print $9}'| grep ^GC|  grep tar.gz |  sed 's/\.tar\.gz//'`
 Name=22_ICS
-tar -xvf "$Name".tar.gz
+#tar -xvf "$Name".tar.gz
 #
 tar -xzf FungalPopgenSMGC-master.tar.gz
 tar -xzf cufflinks-2.2.1.Linux_x86_64.tar.gz
@@ -18,7 +18,7 @@ sort -k1,1V -k4,4n -k5,5rn -k3,3r "$Name".gff > temp.gff
 mv temp.gff "$Name".gff
 #
 #make prot file and list genes in order
-gffread "$Name".gff -x CDS.fa -g "$Name".fna
+gffread "$Name".gff -x CDS.fa -g "$Name".fa
 translate_nucl_to_prot_fasta.py CDS.fa > "$Name"_prot.fa
 list_genes_by_scaff.py "$Name".gff > "$Name"_genes_in_order.txt
 #
